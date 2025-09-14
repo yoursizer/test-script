@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal YourSizer Test</title>
+</head>
+<body>
+    <h1>Minimal YourSizer Test</h1>
+    <div id="test-results"></div>
+    <div data-yoursizer data-product-id="test-001"></div>
+
+    <script>
+        function addResult(message, isSuccess = true) {
+            const div = document.createElement('div');
+            div.style.padding = '10px';
+            div.style.margin = '5px';
+            div.style.borderRadius = '5px';
+            div.style.backgroundColor = isSuccess ? '#d4edda' : '#f8d7da';
+            div.style.color = isSuccess ? '#155724' : '#721c24';
+            div.textContent = message;
+            document.getElementById('test-results').appendChild(div);
+            console.log(message);
+        }
+    </script>
+
+    <!-- Load React -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <script>
+        // Test React loading
+        if (window.React) {
+            addResult('✅ React loaded');
+        } else {
+            addResult('❌ React failed to load', false);
+        }
+        
+        if (window.ReactDOM) {
+            addResult('✅ ReactDOM loaded');
+        } else {
+            addResult('❌ ReactDOM failed to load', false);
+        }
+    </script>
+    
+    <!-- Load YourSizer -->
+    <script src="./dist/yoursizer-widget.umd.js"></script>
+    
+    <script>
+        // Test YourSizer loading
+        setTimeout(() => {
+            if (window.YourSizer) {
+                addResult('✅ YourSizer loaded');
+                addResult(`YourSizer version: ${window.YourSizer.version}`);
+                
+                // Try to initialize
+                try {
+                    window.YourSizer.init({
+                        merchantId: 'test',
+                        onSizeRecommended: function(size) {
+                            addResult(`Size recommended: ${size}`);
+                        }
+                    });
+                    addResult('✅ YourSizer initialized');
+                } catch (error) {
+                    addResult(`❌ YourSizer init error: ${error.message}`, false);
+                }
+            } else {
+                addResult('❌ YourSizer failed to load', false);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -133,22 +133,20 @@ window.YourSizer = {
 }
 
 // Auto-initialize if DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    console.log('📄 YourSizer: DOM ready, auto-initializing...')
-    // Auto-mount elements with data-yoursizer attribute
-    const autoElements = document.querySelectorAll('[data-yoursizer]')
-    if (autoElements.length > 0) {
-      yourSizerManager.init({})
-    }
-  })
-} else {
-  // DOM already ready
-  console.log('📄 YourSizer: DOM already ready, auto-initializing...')
+function autoInitialize() {
+  console.log('📄 YourSizer: Auto-initializing...')
+  // Auto-mount elements with data-yoursizer attribute
   const autoElements = document.querySelectorAll('[data-yoursizer]')
   if (autoElements.length > 0) {
     yourSizerManager.init({})
   }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', autoInitialize)
+} else {
+  // DOM already ready, but wait a bit for other scripts to load
+  setTimeout(autoInitialize, 100)
 }
 
 // Export for module systems
