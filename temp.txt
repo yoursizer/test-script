@@ -1,0 +1,18 @@
+@temp.tsx 
+
+can you make the button find your sizer button width inside the @TshirtProductPage.tsx similar to temp tsx
+
+
+@TshirtProductPage.tsx 
+
+if there is user name inside the button set then don't show the search icon
+
+
+@TshirtProductPage.tsx 
+
+i want to move the button componenet ui and logic to @widget.tsx export name will FindYourSize the props and as separete entity and returned value will be use the set the product page chart list make sure you don't break any other existing features
+
+
+@temp.tsx 
+
+As temp tsx is exporting the and setting the value can you do it @widget.tsx 

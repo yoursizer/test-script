@@ -1,0 +1,45 @@
+{
+    "gender": "male",
+    "measurements": {
+        "height": 153.1,
+        "weight": 62,
+        "chest": 95.6,
+        "waist": 75.9,
+        "hip": 99.5
+    },
+    "clothing_type": "upperwear",
+    "brand_id": "nike",
+    "product_id": "nike-tshirt-001"
+}
+
+{
+  "profiles": [
+    {
+      "id": "USER_QRM330DUR",
+      "name": "Bob",
+      "gender": "male",
+      "measurements": {
+        "height": "153.1",
+        "weight": "62.0",
+        "chest": "95.6",
+        "waist": "75.9",
+        "hips": "99.5"
+      },
+      "hairType": "hair2",
+      "sizeRecommendations": {},
+      "createdAt": "2025-08-04T08:56:52.640Z",
+      "updatedAt": "2025-08-04T08:56:52.642Z",
+      "isActive": true,
+      "morphValues": {
+        "height_200": -0.655,
+        "male_overweight": 0.3,
+        "Chest Width": -0.2993333333333334,
+        "Waist Thickness": -0.3976666666666653,
+        "Hips Size": -0.2786666666666663,
+        "Breast Size": 0
+      }
+    }
+  ],
+  "activeProfileId": "USER_QRM330DUR",
+  "lastUsed": "2025-08-04T08:56:52.643Z"
+}

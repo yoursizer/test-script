@@ -1,0 +1,257 @@
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:51: Received license key: fc43e243-4f85-41ac-9ead-4d935707a8da
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53:
+0|yoursizer-microservice-backend  | === Simple Analytics Log ===
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Raw request body: {
+0|yoursizer-microservice-backend  |   "event_type": "popup_opened",
+0|yoursizer-microservice-backend  |   "license_key": "fc43e243-4f85-41ac-9ead-4d935707a8da",
+0|yoursizer-microservice-backend  |   "product_id": "tshirt-classic-001",
+0|yoursizer-microservice-backend  |   "is_mobile": false,
+0|yoursizer-microservice-backend  |   "location": {
+0|yoursizer-microservice-backend  |     "country": "India",
+0|yoursizer-microservice-backend  |     "city": "Hyderabad",
+0|yoursizer-microservice-backend  |     "region": "Telangana",
+0|yoursizer-microservice-backend  |     "ip": "2406:b400:1a:1694:72:20ac:a363:6395"
+0|yoursizer-microservice-backend  |   },
+0|yoursizer-microservice-backend  |   "timestamp": "2025-08-06T14:17:52.737Z",
+0|yoursizer-microservice-backend  |   "session_id": "1f33b21f-f2a2-44cd-97dc-74136e810806"
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Request headers: {
+0|yoursizer-microservice-backend  |   connection: 'upgrade',
+0|yoursizer-microservice-backend  |   host: 'data.yoursizer.com',
+0|yoursizer-microservice-backend  |   'content-length': '339',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-platform': '"macOS"',
+0|yoursizer-microservice-backend  |   'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
+0|yoursizer-microservice-backend  |   'sec-ch-ua': '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"',
+0|yoursizer-microservice-backend  |   'content-type': 'application/json',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-mobile': '?0',
+0|yoursizer-microservice-backend  |   accept: '*/*',
+0|yoursizer-microservice-backend  |   origin: 'http://localhost:5173',
+0|yoursizer-microservice-backend  |   'sec-fetch-site': 'cross-site',
+0|yoursizer-microservice-backend  |   'sec-fetch-mode': 'cors',
+0|yoursizer-microservice-backend  |   'sec-fetch-dest': 'empty',
+0|yoursizer-microservice-backend  |   referer: 'http://localhost:5173/',
+0|yoursizer-microservice-backend  |   'accept-encoding': 'gzip, deflate, br, zstd',
+0|yoursizer-microservice-backend  |   'accept-language': 'en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,es-ES;q=0.6,es;q=0.5,hi;q=0.4'
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Request method: POST
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Request URL: /api/log-analytics
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Timestamp: 2025-08-06T14:17:53.015Z
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: === End Simple Log ===
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53:
+0|yoursizer-microservice-backend  | === Simple Analytics Log ===
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Raw request body: {
+0|yoursizer-microservice-backend  |   "event_type": "step_started",
+0|yoursizer-microservice-backend  |   "license_key": "fc43e243-4f85-41ac-9ead-4d935707a8da",
+0|yoursizer-microservice-backend  |   "step": "gender_selection",
+0|yoursizer-microservice-backend  |   "step_id": "step_1",
+0|yoursizer-microservice-backend  |   "is_mobile": false,
+0|yoursizer-microservice-backend  |   "location": {
+0|yoursizer-microservice-backend  |     "country": "India",
+0|yoursizer-microservice-backend  |     "city": "Hyderabad",
+0|yoursizer-microservice-backend  |     "region": "Telangana",
+0|yoursizer-microservice-backend  |     "ip": "2406:b400:1a:1694:72:20ac:a363:6395"
+0|yoursizer-microservice-backend  |   },
+0|yoursizer-microservice-backend  |   "timestamp": "2025-08-06T14:17:53.082Z",
+0|yoursizer-microservice-backend  |   "session_id": "1f33b21f-f2a2-44cd-97dc-74136e810806"
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Request headers: {
+0|yoursizer-microservice-backend  |   connection: 'upgrade',
+0|yoursizer-microservice-backend  |   host: 'data.yoursizer.com',
+0|yoursizer-microservice-backend  |   'content-length': '350',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-platform': '"macOS"',
+0|yoursizer-microservice-backend  |   'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
+0|yoursizer-microservice-backend  |   'sec-ch-ua': '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"',
+0|yoursizer-microservice-backend  |   'content-type': 'application/json',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-mobile': '?0',
+0|yoursizer-microservice-backend  |   accept: '*/*',
+0|yoursizer-microservice-backend  |   origin: 'http://localhost:5173',
+0|yoursizer-microservice-backend  |   'sec-fetch-site': 'cross-site',
+0|yoursizer-microservice-backend  |   'sec-fetch-mode': 'cors',
+0|yoursizer-microservice-backend  |   'sec-fetch-dest': 'empty',
+0|yoursizer-microservice-backend  |   referer: 'http://localhost:5173/',
+0|yoursizer-microservice-backend  |   'accept-encoding': 'gzip, deflate, br, zstd',
+0|yoursizer-microservice-backend  |   'accept-language': 'en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,es-ES;q=0.6,es;q=0.5,hi;q=0.4'
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Request method: POST
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Request URL: /api/log-analytics
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Timestamp: 2025-08-06T14:17:53.189Z
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: === End Simple Log ===
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53:
+0|yoursizer-microservice-backend  | === Simple Analytics Log ===
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Raw request body: {
+0|yoursizer-microservice-backend  |   "event_type": "step_started",
+0|yoursizer-microservice-backend  |   "license_key": "fc43e243-4f85-41ac-9ead-4d935707a8da",
+0|yoursizer-microservice-backend  |   "step": "size_recommendation",
+0|yoursizer-microservice-backend  |   "step_id": "step_4",
+0|yoursizer-microservice-backend  |   "is_mobile": false,
+0|yoursizer-microservice-backend  |   "location": {
+0|yoursizer-microservice-backend  |     "country": "India",
+0|yoursizer-microservice-backend  |     "city": "Hyderabad",
+0|yoursizer-microservice-backend  |     "region": "Telangana",
+0|yoursizer-microservice-backend  |     "ip": "2406:b400:1a:1694:72:20ac:a363:6395"
+0|yoursizer-microservice-backend  |   },
+0|yoursizer-microservice-backend  |   "timestamp": "2025-08-06T14:17:53.709Z",
+0|yoursizer-microservice-backend  |   "session_id": "1f33b21f-f2a2-44cd-97dc-74136e810806"
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Request headers: {
+0|yoursizer-microservice-backend  |   connection: 'upgrade',
+0|yoursizer-microservice-backend  |   host: 'data.yoursizer.com',
+0|yoursizer-microservice-backend  |   'content-length': '353',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-platform': '"macOS"',
+0|yoursizer-microservice-backend  |   'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
+0|yoursizer-microservice-backend  |   'sec-ch-ua': '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"',
+0|yoursizer-microservice-backend  |   'content-type': 'application/json',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-mobile': '?0',
+0|yoursizer-microservice-backend  |   accept: '*/*',
+0|yoursizer-microservice-backend  |   origin: 'http://localhost:5173',
+0|yoursizer-microservice-backend  |   'sec-fetch-site': 'cross-site',
+0|yoursizer-microservice-backend  |   'sec-fetch-mode': 'cors',
+0|yoursizer-microservice-backend  |   'sec-fetch-dest': 'empty',
+0|yoursizer-microservice-backend  |   referer: 'http://localhost:5173/',
+0|yoursizer-microservice-backend  |   'accept-encoding': 'gzip, deflate, br, zstd',
+0|yoursizer-microservice-backend  |   'accept-language': 'en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,es-ES;q=0.6,es;q=0.5,hi;q=0.4'
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Request method: POST
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Request URL: /api/log-analytics
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: Timestamp: 2025-08-06T14:17:53.816Z
+0|yoursizer-microservice-backend  | 2025-08-06T14:17:53: === End Simple Log ===
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:42:
+0|yoursizer-microservice-backend  | === Simple Analytics Log ===
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:42: Raw request body: {
+0|yoursizer-microservice-backend  |   "event_type": "step_completed",
+0|yoursizer-microservice-backend  |   "license_key": "fc43e243-4f85-41ac-9ead-4d935707a8da",
+0|yoursizer-microservice-backend  |   "step": "detailed_measurements",
+0|yoursizer-microservice-backend  |   "step_id": "step_3",
+0|yoursizer-microservice-backend  |   "step_completed": true,
+0|yoursizer-microservice-backend  |   "is_mobile": false,
+0|yoursizer-microservice-backend  |   "time_spent_ms": 0,
+0|yoursizer-microservice-backend  |   "location": {
+0|yoursizer-microservice-backend  |     "country": "India",
+0|yoursizer-microservice-backend  |     "city": "Hyderabad",
+0|yoursizer-microservice-backend  |     "region": "Telangana",
+0|yoursizer-microservice-backend  |     "ip": "2406:b400:1a:1694:72:20ac:a363:6395"
+0|yoursizer-microservice-backend  |   },
+0|yoursizer-microservice-backend  |   "timestamp": "2025-08-06T14:18:42.342Z",
+0|yoursizer-microservice-backend  |   "session_id": "1f33b21f-f2a2-44cd-97dc-74136e810806"
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:42: Request headers: {
+0|yoursizer-microservice-backend  |   connection: 'upgrade',
+0|yoursizer-microservice-backend  |   host: 'data.yoursizer.com',
+0|yoursizer-microservice-backend  |   'content-length': '397',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-platform': '"macOS"',
+0|yoursizer-microservice-backend  |   'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
+0|yoursizer-microservice-backend  |   'sec-ch-ua': '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"',
+0|yoursizer-microservice-backend  |   'content-type': 'application/json',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-mobile': '?0',
+0|yoursizer-microservice-backend  |   accept: '*/*',
+0|yoursizer-microservice-backend  |   origin: 'http://localhost:5173',
+0|yoursizer-microservice-backend  |   'sec-fetch-site': 'cross-site',
+0|yoursizer-microservice-backend  |   'sec-fetch-mode': 'cors',
+0|yoursizer-microservice-backend  |   'sec-fetch-dest': 'empty',
+0|yoursizer-microservice-backend  |   referer: 'http://localhost:5173/',
+0|yoursizer-microservice-backend  |   'accept-encoding': 'gzip, deflate, br, zstd',
+0|yoursizer-microservice-backend  |   'accept-language': 'en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,es-ES;q=0.6,es;q=0.5,hi;q=0.4'
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:42: Request method: POST
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:42: Request URL: /api/log-analytics
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:42: Timestamp: 2025-08-06T14:18:42.622Z
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:42: === End Simple Log ===
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:55:
+0|yoursizer-microservice-backend  | === Simple Analytics Log ===
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:55: Raw request body: {
+0|yoursizer-microservice-backend  |   "event_type": "size_recommended",
+0|yoursizer-microservice-backend  |   "license_key": "fc43e243-4f85-41ac-9ead-4d935707a8da",
+0|yoursizer-microservice-backend  |   "gender": "male",
+0|yoursizer-microservice-backend  |   "size": "XL",
+0|yoursizer-microservice-backend  |   "step": "size_recommendation",
+0|yoursizer-microservice-backend  |   "step_completed": true,
+0|yoursizer-microservice-backend  |   "recommended_sizes": {
+0|yoursizer-microservice-backend  |     "primary": "L",
+0|yoursizer-microservice-backend  |     "smaller": "M",
+0|yoursizer-microservice-backend  |     "larger": "XL"
+0|yoursizer-microservice-backend  |   },
+0|yoursizer-microservice-backend  |   "is_mobile": false,
+0|yoursizer-microservice-backend  |   "location": {
+0|yoursizer-microservice-backend  |     "country": "India",
+0|yoursizer-microservice-backend  |     "city": "Hyderabad",
+0|yoursizer-microservice-backend  |     "region": "Telangana",
+0|yoursizer-microservice-backend  |     "ip": "2406:b400:1a:1694:72:20ac:a363:6395"
+0|yoursizer-microservice-backend  |   },
+0|yoursizer-microservice-backend  |   "timestamp": "2025-08-06T14:18:55.001Z",
+0|yoursizer-microservice-backend  |   "session_id": "1f33b21f-f2a2-44cd-97dc-74136e810806"
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:55: Request headers: {
+0|yoursizer-microservice-backend  |   connection: 'upgrade',
+0|yoursizer-microservice-backend  |   host: 'data.yoursizer.com',
+0|yoursizer-microservice-backend  |   'content-length': '452',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-platform': '"macOS"',
+0|yoursizer-microservice-backend  |   'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
+0|yoursizer-microservice-backend  |   'sec-ch-ua': '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"',
+0|yoursizer-microservice-backend  |   'content-type': 'application/json',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-mobile': '?0',
+0|yoursizer-microservice-backend  |   accept: '*/*',
+0|yoursizer-microservice-backend  |   origin: 'http://localhost:5173',
+0|yoursizer-microservice-backend  |   'sec-fetch-site': 'cross-site',
+0|yoursizer-microservice-backend  |   'sec-fetch-mode': 'cors',
+0|yoursizer-microservice-backend  |   'sec-fetch-dest': 'empty',
+0|yoursizer-microservice-backend  |   referer: 'http://localhost:5173/',
+0|yoursizer-microservice-backend  |   'accept-encoding': 'gzip, deflate, br, zstd',
+0|yoursizer-microservice-backend  |   'accept-language': 'en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,es-ES;q=0.6,es;q=0.5,hi;q=0.4'
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:55: Request method: POST
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:55: Request URL: /api/log-analytics
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:55: Timestamp: 2025-08-06T14:18:55.286Z
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:55: === End Simple Log ===
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:57:
+0|yoursizer-microservice-backend  | === Simple Analytics Log ===
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:57: Raw request body: {
+0|yoursizer-microservice-backend  |   "event_type": "add_to_cart",
+0|yoursizer-microservice-backend  |   "license_key": "fc43e243-4f85-41ac-9ead-4d935707a8da",
+0|yoursizer-microservice-backend  |   "product_id": "tshirt-classic-001",
+0|yoursizer-microservice-backend  |   "size": "XL",
+0|yoursizer-microservice-backend  |   "selected_size": "XL",
+0|yoursizer-microservice-backend  |   "gender": "male",
+0|yoursizer-microservice-backend  |   "step": "cart",
+0|yoursizer-microservice-backend  |   "step_completed": true,
+0|yoursizer-microservice-backend  |   "time_spent_ms": 63490,
+0|yoursizer-microservice-backend  |   "is_mobile": false,
+0|yoursizer-microservice-backend  |   "user_inputs": {
+0|yoursizer-microservice-backend  |     "gender": "male",
+0|yoursizer-microservice-backend  |     "step_progression": {
+0|yoursizer-microservice-backend  |       "step_1_completed": true,
+0|yoursizer-microservice-backend  |       "step_2_completed": true,
+0|yoursizer-microservice-backend  |       "step_3_completed": true,
+0|yoursizer-microservice-backend  |       "step_4_completed": true
+0|yoursizer-microservice-backend  |     }
+0|yoursizer-microservice-backend  |   },
+0|yoursizer-microservice-backend  |   "location": {
+0|yoursizer-microservice-backend  |     "country": "India",
+0|yoursizer-microservice-backend  |     "city": "Hyderabad",
+0|yoursizer-microservice-backend  |     "region": "Telangana",
+0|yoursizer-microservice-backend  |     "ip": "2406:b400:1a:1694:72:20ac:a363:6395"
+0|yoursizer-microservice-backend  |   },
+0|yoursizer-microservice-backend  |   "timestamp": "2025-08-06T14:18:57.200Z",
+0|yoursizer-microservice-backend  |   "session_id": "1f33b21f-f2a2-44cd-97dc-74136e810806"
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:57: Request headers: {
+0|yoursizer-microservice-backend  |   connection: 'upgrade',
+0|yoursizer-microservice-backend  |   host: 'data.yoursizer.com',
+0|yoursizer-microservice-backend  |   'content-length': '594',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-platform': '"macOS"',
+0|yoursizer-microservice-backend  |   'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
+0|yoursizer-microservice-backend  |   'sec-ch-ua': '"Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"',
+0|yoursizer-microservice-backend  |   'content-type': 'application/json',
+0|yoursizer-microservice-backend  |   'sec-ch-ua-mobile': '?0',
+0|yoursizer-microservice-backend  |   accept: '*/*',
+0|yoursizer-microservice-backend  |   origin: 'http://localhost:5173',
+0|yoursizer-microservice-backend  |   'sec-fetch-site': 'cross-site',
+0|yoursizer-microservice-backend  |   'sec-fetch-mode': 'cors',
+0|yoursizer-microservice-backend  |   'sec-fetch-dest': 'empty',
+0|yoursizer-microservice-backend  |   referer: 'http://localhost:5173/',
+0|yoursizer-microservice-backend  |   'accept-encoding': 'gzip, deflate, br, zstd',
+0|yoursizer-microservice-backend  |   'accept-language': 'en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7,es-ES;q=0.6,es;q=0.5,hi;q=0.4'
+0|yoursizer-microservice-backend  | }
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:57: Request method: POST
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:57: Request URL: /api/log-analytics
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:57: Timestamp: 2025-08-06T14:18:57.307Z
+0|yoursizer-microservice-backend  | 2025-08-06T14:18:57: === End Simple Log ===

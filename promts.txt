@@ -1,0 +1,28 @@
+
+promts
+can you remove the product image and details just export the Find YOur size button as a componenet.
+
+Make the updates in the same file
+
+
+promts
+@widget.tsx @TshirtProductPage.tsx
+
+can you import the Find your sizer widget in the Tshirt product page
+
+prompt task 3
+@route.ts @route.ts 
+
+instead of sending request from the request to /api/sizerecommmeend i have . Can you move @route.ts to use Size Recommendation ts so that it can directly make the request . make sure the featuer should not broke. 
+
+
+promts task 4
+
+
+@useCartIntegration.ts 
+
+can you remove the  alert could not find product data . please manually select size "M" and add to cart .
+
+I want the  @widget.tsx Find Your size will return on the value on add to cart and @TshirtProductPage.tsx will set the value returned from the plugin on its size chart list. 
+
+assit to do it make sure you do break or make any changes to the existing features 
