@@ -1,4 +1,4 @@
-import { SimpleYourSizerWidget } from './simple-widget'
+import { FindYourSizerWidget } from './widget-plugin/widget'
 import './index.css'
 
 // Get React and ReactDOM from global scope for UMD builds
@@ -66,7 +66,7 @@ class YoursizerWidget {
         console.log('Using React 18 createRoot');
         this.root = GlobalReactDOM.createRoot(this.container)
         this.root.render(
-          GlobalReact.createElement(SimpleYourSizerWidget, {
+          GlobalReact.createElement(FindYourSizerWidget, {
             buttonText: options.buttonText,
             position: options.position,
             className: options.className,
@@ -82,7 +82,7 @@ class YoursizerWidget {
         // Fallback for older React versions
         console.log('Using React legacy render');
         GlobalReactDOM.render(
-          GlobalReact.createElement(SimpleYourSizerWidget, {
+          GlobalReact.createElement(FindYourSizerWidget, {
             buttonText: options.buttonText,
             position: options.position,
             className: options.className,
@@ -132,7 +132,7 @@ class YoursizerWidget {
       if (this.root && this.root.render) {
         // React 18+ with createRoot
         this.root.render(
-          GlobalReact.createElement(SimpleYourSizerWidget, {
+          GlobalReact.createElement(FindYourSizerWidget, {
             buttonText: updatedOptions.buttonText,
             position: updatedOptions.position,
             className: updatedOptions.className,
@@ -147,7 +147,7 @@ class YoursizerWidget {
       } else {
         // Fallback for older React versions
         GlobalReactDOM.render(
-          GlobalReact.createElement(SimpleYourSizerWidget, {
+          GlobalReact.createElement(FindYourSizerWidget, {
             buttonText: updatedOptions.buttonText,
             position: updatedOptions.position,
             className: updatedOptions.className,
@@ -171,17 +171,22 @@ const widgetInstance = new YoursizerWidget()
 // Expose global API
 declare global {
   interface Window {
-    SimpleYourSizerWidget: {
+    FindYourSizerWidget: {
       create: (options: WidgetOptions) => WidgetInstance
     }
   }
 }
 
 // Set global API
-window.SimpleYourSizerWidget = {
+;(window as any).FindYourSizerWidget = {
+  create: (options: WidgetOptions) => widgetInstance.create(options)
+}
+
+// Also set the SimpleYourSizerWidget for backward compatibility
+;(window as any).SimpleYourSizerWidget = {
   create: (options: WidgetOptions) => widgetInstance.create(options)
 }
 
 // Export for module systems
 export { YoursizerWidget }
-export default window.SimpleYourSizerWidget
+export default (window as any).FindYourSizerWidget

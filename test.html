@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourSizer Widget Test</title>
+    
+    <!-- React Dependencies -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Production-ready inline Tailwind CSS -->
+    <style>
+        /* Tailwind CSS Core - Production Ready */
+        .yoursizer-widget-container * {
+            box-sizing: border-box;
+        }
+        .yoursizer-widget-container .flex { display: flex; }
+        .yoursizer-widget-container .flex-col { flex-direction: column; }
+        .yoursizer-widget-container .items-center { align-items: center; }
+        .yoursizer-widget-container .justify-center { justify-content: center; }
+        .yoursizer-widget-container .w-full { width: 100%; }
+        .yoursizer-widget-container .h-full { height: 100%; }
+        .yoursizer-widget-container .p-4 { padding: 1rem; }
+        .yoursizer-widget-container .p-6 { padding: 1.5rem; }
+        .yoursizer-widget-container .m-4 { margin: 1rem; }
+        .yoursizer-widget-container .mb-4 { margin-bottom: 1rem; }
+        .yoursizer-widget-container .mt-4 { margin-top: 1rem; }
+        .yoursizer-widget-container .text-center { text-align: center; }
+        .yoursizer-widget-container .text-white { color: white; }
+        .yoursizer-widget-container .bg-blue-600 { background-color: #2563eb; }
+        .yoursizer-widget-container .bg-blue-700 { background-color: #1d4ed8; }
+        .yoursizer-widget-container .hover\\:bg-blue-700:hover { background-color: #1d4ed8; }
+        .yoursizer-widget-container .rounded-lg { border-radius: 0.5rem; }
+        .yoursizer-widget-container .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .yoursizer-widget-container .border { border-width: 1px; }
+        .yoursizer-widget-container .border-gray-300 { border-color: #d1d5db; }
+        .yoursizer-widget-container .font-medium { font-weight: 500; }
+        .yoursizer-widget-container .font-semibold { font-weight: 600; }
+        .yoursizer-widget-container .text-sm { font-size: 0.875rem; }
+        .yoursizer-widget-container .text-lg { font-size: 1.125rem; }
+        .yoursizer-widget-container .cursor-pointer { cursor: pointer; }
+        .yoursizer-widget-container .transition { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .yoursizer-widget-container .transform { transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+        .yoursizer-widget-container .hover\\:scale-105:hover { --tw-scale-x: 1.05; --tw-scale-y: 1.05; }
+        .yoursizer-widget-container .focus\\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
+        .yoursizer-widget-container .focus\\:ring-2:focus { --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000); }
+        .yoursizer-widget-container .focus\\:ring-blue-500:focus { --tw-ring-color: #3b82f6; }
+        .yoursizer-widget-container .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .yoursizer-widget-container .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+        .yoursizer-widget-container .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        .yoursizer-widget-container .space-y-4 > * + * { margin-top: 1rem; }
+        .yoursizer-widget-container .space-y-2 > * + * { margin-top: 0.5rem; }
+        .yoursizer-widget-container .grid { display: grid; }
+        .yoursizer-widget-container .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .yoursizer-widget-container .gap-4 { gap: 1rem; }
+        .yoursizer-widget-container .hidden { display: none; }
+        .yoursizer-widget-container .block { display: block; }
+        .yoursizer-widget-container .relative { position: relative; }
+        .yoursizer-widget-container .absolute { position: absolute; }
+        .yoursizer-widget-container .top-0 { top: 0px; }
+        .yoursizer-widget-container .right-0 { right: 0px; }
+        .yoursizer-widget-container .z-10 { z-index: 10; }
+        .yoursizer-widget-container .overflow-hidden { overflow: hidden; }
+        .yoursizer-widget-container .text-gray-600 { color: #4b5563; }
+        .yoursizer-widget-container .text-gray-800 { color: #1f2937; }
+        .yoursizer-widget-container .bg-gray-50 { background-color: #f9fafb; }
+        .yoursizer-widget-container .bg-white { background-color: white; }
+        .yoursizer-widget-container .min-h-screen { min-height: 100vh; }
+        .yoursizer-widget-container .h-screen { height: 100vh; }
+        .yoursizer-widget-container .max-w-md { max-width: 28rem; }
+        .yoursizer-widget-container .mx-auto { margin-left: auto; margin-right: auto; }
+        .yoursizer-widget-container .fixed { position: fixed; }
+        .yoursizer-widget-container .inset-0 { top: 0px; right: 0px; bottom: 0px; left: 0px; }
+        .yoursizer-widget-container .bg-black { background-color: black; }
+        .yoursizer-widget-container .bg-opacity-50 { --tw-bg-opacity: 0.5; background-color: rgba(0, 0, 0, var(--tw-bg-opacity)); }
+        .yoursizer-widget-container .backdrop-blur-sm { backdrop-filter: blur(4px); }
+        .yoursizer-widget-container .animate-spin { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .yoursizer-widget-container .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        .yoursizer-widget-container .animate-bounce { animation: bounce 1s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8,0,1,1); } 50% { transform: none; animation-timing-function: cubic-bezier(0,0,0.2,1); } }
+        
+        /* Additional utility classes for the test page */
+        .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .font-bold { font-weight: 700; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .max-w-4xl { max-width: 56rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .bg-gray-50 { background-color: #f9fafb; }
+        .bg-white { background-color: white; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .p-6 { padding: 1.5rem; }
+        .p-8 { padding: 2rem; }
+        .min-h-screen { min-height: 100vh; }
+    </style>
+    
+    <!-- YourSizer Widget CSS -->
+    <link rel="stylesheet" href="https://yoursizer-script-tag.s3.eu-north-1.amazonaws.com/dist/style.css">
+    
+    <!-- YourSizer Widget Script -->
+    <script src="https://yoursizer-script-tag.s3.eu-north-1.amazonaws.com/dist/yoursizer-widget.umd.js"></script>
+</head>
+<body class="min-h-screen bg-gray-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8">YourSizer Widget Test</h1>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-semibold mb-4">Widget Test</h2>
+            <div id="yoursizer-widget-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // Debug information
+        console.log('🔍 Debug Information:');
+        console.log('React available:', typeof window.React !== 'undefined');
+        console.log('ReactDOM available:', typeof window.ReactDOM !== 'undefined');
+        console.log('FindYourSizerWidget available:', typeof window.FindYourSizerWidget !== 'undefined');
+        console.log('SimpleYourSizerWidget available:', typeof window.SimpleYourSizerWidget !== 'undefined');
+        console.log('FindYourSizerWidget object:', window.FindYourSizerWidget);
+        console.log('SimpleYourSizerWidget object:', window.SimpleYourSizerWidget);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM Content Loaded');
+            
+            // Wait a bit for all scripts to load
+            setTimeout(() => {
+                const container = document.getElementById('yoursizer-widget-container');
+                
+                if (!container) {
+                    console.error('❌ Container element not found');
+                    return;
+                }
+                
+                // Try to find the widget function
+                let widgetFunction = null;
+                if (typeof window.FindYourSizerWidget !== 'undefined' && typeof window.FindYourSizerWidget.create === 'function') {
+                    widgetFunction = window.FindYourSizerWidget;
+                    console.log('✅ Using FindYourSizerWidget');
+                } else if (typeof window.SimpleYourSizerWidget !== 'undefined' && typeof window.SimpleYourSizerWidget.create === 'function') {
+                    widgetFunction = window.SimpleYourSizerWidget;
+                    console.log('✅ Using SimpleYourSizerWidget');
+                } else {
+                    console.error('❌ No widget function available');
+                    console.error('FindYourSizerWidget:', window.FindYourSizerWidget);
+                    console.error('SimpleYourSizerWidget:', window.SimpleYourSizerWidget);
+                    container.innerHTML = '<p style="color: red;">Error: Widget not loaded. Check console for details.</p>';
+                    return;
+                }
+                
+                console.log('✅ Initializing widget...');
+                
+                try {
+                    widgetFunction.create({
+                        container: container,
+                        buttonText: "Find Your Perfect Size",
+                        position: "center",
+                        className: "w-full",
+                        buttonBg: "#4F46E5",
+                        licenseKey: "7b2e2a34-07f7-4798-8a6f-f9b6ed0365c5",
+                        productId: "test-product-123",
+                        brandId: "test-brand",
+                        clothingType: "tshirt",
+                        onSizeRecommended: function(size) {
+                            console.log('✅ Recommended size:', size);
+                            alert('Recommended size: ' + size);
+                        },
+                        onError: function(error) {
+                            console.error('❌ Widget error:', error);
+                            alert('Widget error: ' + error.message);
+                        }
+                    });
+                    
+                    console.log('✅ Widget initialized successfully');
+                } catch (error) {
+                    console.error('❌ Widget initialization failed:', error);
+                    container.innerHTML = '<p style="color: red;">Error: ' + error.message + '</p>';
+                }
+            }, 1000); // Wait 1 second for all scripts to load
+        });
+    </script>
+</body>
+</html>

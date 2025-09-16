@@ -1,247 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YourSizer Script Tag Test</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f0f0f0;
-        }
-        
-        .test-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        
-        .status {
-            padding: 15px;
-            border-radius: 5px;
-            margin: 10px 0;
-            font-weight: bold;
-        }
-        
-        .status.loading { background: #fff3cd; color: #856404; }
-        .status.success { background: #d4edda; color: #155724; }
-        .status.error { background: #f8d7da; color: #721c24; }
-        
-        .widget-container {
-            border: 2px dashed #007bff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            background: #f8f9ff;
-        }
-        
-        .test-info {
-            background: #e7f3ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 10px 0;
-        }
-        
-        .code-block {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 5px;
-            padding: 15px;
-            font-family: monospace;
-            font-size: 14px;
-            overflow-x: auto;
-            margin: 10px 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="test-container">
-        <h1>🧪 YourSizer Script Tag Test</h1>
-        <p>This page tests the YourSizer widget integration using a script tag.</p>
-        
-        <div id="status" class="status loading">
-            🔄 Loading YourSizer Widget...
-        </div>
-        
-        <div class="test-info">
-            <h3>📋 Test Steps:</h3>
-            <ol>
-                <li>Check if React and ReactDOM load successfully</li>
-                <li>Check if YourSizer widget loads successfully</li>
-                <li>Check if widget mounts to the container</li>
-                <li>Test widget functionality (click the button)</li>
-            </ol>
-        </div>
-        
-        <div class="widget-container">
-            <h3>🎯 YourSizer Widget</h3>
-            <div 
-                data-yoursizer
-                data-product-id="test-product-001"
-                data-brand-id="test-brand"
-                data-clothing-type="tshirt"
-                data-license-key="test-license-key"
-                data-button-text="Test My Size"
-                data-position="center"
-            ></div>
-        </div>
-        
-        <div class="test-info">
-            <h3>📝 Integration Code Used:</h3>
-            <div class="code-block">
-&lt;!-- React Dependencies --&gt;
-&lt;script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"&gt;&lt;/script&gt;
-&lt;script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"&gt;&lt;/script&gt;
-
-&lt;!-- YourSizer Widget --&gt;
-&lt;script src="./dist/yoursizer-widget.umd.js"&gt;&lt;/script&gt;
-
-&lt;!-- Widget Container --&gt;
-&lt;div 
-    data-yoursizer
-    data-product-id="test-product-001"
-    data-brand-id="test-brand"
-    data-clothing-type="tshirt"
-    data-license-key="test-license-key"
-    data-button-text="Test My Size"
-    data-position="center"
-&gt;&lt;/div&gt;
-            </div>
-        </div>
-        
-        <div id="test-results"></div>
-    </div>
-
-    <!-- Include React and ReactDOM (required for UMD build) -->
+    <title>Simple UMD Test</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    
-    <!-- Include YourSizer Widget -->
-    <script src="./dist/yoursizer-widget.umd.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <h1>Simple UMD Test</h1>
+    <div id="test-container"></div>
     
     <script>
-        // Test results container
-        const testResults = document.getElementById('test-results');
-        const statusEl = document.getElementById('status');
+        console.log('Before loading UMD file...');
+        console.log('React available:', typeof window.React);
+        console.log('ReactDOM available:', typeof window.ReactDOM);
+    </script>
+    
+    <script src="./dist/yoursizer-widget.umd.js" onerror="console.error('Failed to load UMD file')"></script>
+    
+    <script>
+        console.log('After loading UMD file...');
+        console.log('FindYourSizerWidget:', window.FindYourSizerWidget);
+        console.log('Type:', typeof window.FindYourSizerWidget);
         
-        function addTestResult(test, status, message) {
-            const result = document.createElement('div');
-            result.className = `status ${status}`;
-            result.innerHTML = `${test}: ${message}`;
-            testResults.appendChild(result);
+        if (window.FindYourSizerWidget) {
+            console.log('Keys:', Object.keys(window.FindYourSizerWidget));
+            console.log('Create method:', window.FindYourSizerWidget.create);
         }
         
-        function updateStatus(message, type) {
-            statusEl.textContent = message;
-            statusEl.className = `status ${type}`;
-        }
-        
-        // Test 1: Check React
-        function testReact() {
-            if (window.React && window.ReactDOM) {
-                addTestResult('✅ React', 'success', 'React and ReactDOM loaded successfully');
-                return true;
-            } else {
-                addTestResult('❌ React', 'error', 'React or ReactDOM failed to load');
-                return false;
+        // Test widget creation
+        setTimeout(() => {
+            try {
+                const container = document.getElementById('test-container');
+                if (window.FindYourSizerWidget && window.FindYourSizerWidget.create) {
+                    console.log('Creating widget...');
+                    const widget = window.FindYourSizerWidget.create({
+                        container: container,
+                        buttonText: 'Test Widget',
+                        licenseKey: 'demo-key'
+                    });
+                    console.log('Widget created:', widget);
+                } else {
+                    console.error('Widget not available');
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-        }
-        
-        // Test 2: Check YourSizer
-        function testYourSizer() {
-            if (window.YourSizer) {
-                addTestResult('✅ YourSizer', 'success', `YourSizer loaded successfully (v${window.YourSizer.version})`);
-                return true;
-            } else {
-                addTestResult('❌ YourSizer', 'error', 'YourSizer widget failed to load');
-                return false;
-            }
-        }
-        
-        // Test 3: Check widget mounting
-        function testWidgetMounting() {
-            const widgetContainer = document.querySelector('[data-yoursizer]');
-            if (widgetContainer && widgetContainer.children.length > 0) {
-                addTestResult('✅ Widget Mount', 'success', 'Widget mounted successfully to container');
-                return true;
-            } else {
-                addTestResult('❌ Widget Mount', 'error', 'Widget failed to mount to container');
-                return false;
-            }
-        }
-        
-        // Test 4: Check widget functionality
-        function testWidgetFunctionality() {
-            const button = document.querySelector('[data-yoursizer] button');
-            if (button) {
-                addTestResult('✅ Widget Button', 'success', 'Widget button found and clickable');
-                return true;
-            } else {
-                addTestResult('❌ Widget Button', 'error', 'Widget button not found');
-                return false;
-            }
-        }
-        
-        // Run all tests
-        function runTests() {
-            console.log('🧪 Running YourSizer Script Tag Tests...');
-            
-            const reactOk = testReact();
-            const yourSizerOk = testYourSizer();
-            const mountOk = testWidgetMounting();
-            const functionalityOk = testWidgetFunctionality();
-            
-            if (reactOk && yourSizerOk && mountOk && functionalityOk) {
-                updateStatus('✅ All tests passed! YourSizer widget is working correctly.', 'success');
-            } else {
-                updateStatus('❌ Some tests failed. Check the results below.', 'error');
-            }
-        }
-        
-        // Initialize YourSizer with callback
-        function initializeYourSizer() {
-            if (window.YourSizer) {
-                console.log('🚀 Initializing YourSizer...');
-                
-                window.YourSizer.init({
-                    merchantId: 'test-merchant',
-                    onSizeRecommended: function(size) {
-                        console.log('🎯 Size recommended:', size);
-                        addTestResult('✅ Size Recommendation', 'success', `Size recommended: ${size}`);
-                    }
-                });
-                
-                // Run tests after a short delay to allow widget to mount
-                setTimeout(runTests, 2000);
-            } else {
-                updateStatus('❌ YourSizer not available', 'error');
-            }
-        }
-        
-        // Wait for all scripts to load
-        window.addEventListener('load', function() {
-            console.log('📄 Page loaded, checking scripts...');
-            
-            // Check if scripts are loaded
-            if (window.React && window.ReactDOM && window.YourSizer) {
-                initializeYourSizer();
-            } else {
-                // Wait a bit more for scripts to load
-                setTimeout(initializeYourSizer, 1000);
-            }
-        });
-        
-        // Also run tests after a longer delay as fallback
-        setTimeout(function() {
-            if (document.getElementById('status').textContent.includes('Loading')) {
-                runTests();
-            }
-        }, 5000);
+        }, 1000);
     </script>
 </body>
 </html>
