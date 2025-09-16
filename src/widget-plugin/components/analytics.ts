@@ -241,7 +241,7 @@ class AnalyticsService {
   private sessionId: string;
   private stepStartTimes: Map<string, number>;
   private sentEvents: Set<string>;
-  private readonly API_ENDPOINT = 'https://data.yoursizer.com/api/v1/npm/log-analytics';
+  private readonly API_ENDPOINT = 'https://data.yoursizer.com/api/v1/npm/analytics';
   private locationService: LocationService;
   private popupOpenedPromise: Promise<void> | null = null;
 

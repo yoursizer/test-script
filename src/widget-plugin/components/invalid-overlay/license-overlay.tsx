@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { X, AlertTriangle, CheckCircle, RefreshCw } from "lucide-react"
-
+import React from "react"
 interface LicenseOverlayProps {
   licenseStatus: { isValid: boolean; message?: string } | null;
   onClose: () => void;

@@ -1,121 +1,271 @@
-# YourSizer Widget - Script Tag Integration
+# YourSizer Widget - AI-Powered updates
 
-A powerful AI-powered size recommendation widget that can be easily embedded into any website using a simple script tag.
+The `FindYourSizerWidget` is a customizable React component that provides AI-powered size recommendations for clothing items. It integrates with user profiles and provides a seamless sizing experience with license verification and dynamic API integration.
 
-## 🚀 Quick Start
+## Features
 
-### 1. Include Dependencies
-```html
-<!-- Include React dependencies -->
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+- 🤖 AI-powered size recommendations
+- 👤 User profile integration with fast-track mode
+- 📱 Mobile-responsive design
+- 🎨 Customizable styling and positioning
+- 🔄 Real-time profile updates
+- 📊 Measurement-based sizing
+- 🔐 License verification system
+- 🌐 Dynamic API integration with product/brand data
+- 🎯 Size recommendation callbacks
+- 🎨 Customizable button backgrounds and animations
 
-<!-- Include YourSizer Widget -->
-<script src="https://shashank1623.github.io/yoursizer-widget-test/yoursizer-widget.umd.js"></script>
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `buttonText` | `string` | `'Find Your Size'` | Custom button text. If not provided, uses dynamic text based on user profile |
+| `position` | `'top' \| 'bottom' \| 'left' \| 'right' \| 'center'` | `'center'` | Position of the button within its container |
+| `className` | `string` | `''` | Additional CSS classes for styling |
+| `buttonBg` | `string` | `undefined` | Custom background color/gradient for the button. If not provided, uses default animated gradient |
+| `licenseKey` | `string` | `'demo-key'` | License key for widget verification |
+| `onSizeRecommended` | `(size: string) => void` | `undefined` | Callback function called when a size is recommended |
+| `productId` | `string` | `'default-product'` | Product ID for API size recommendations |
+| `brandId` | `string` | `'generic'` | Brand ID for API size recommendations |
+| `clothingType` | `string` | `'tshirt'` | Clothing type for API size recommendations |
+
+## Usage Examples
+
+### Basic Usage
+```tsx
+import { FindYourSizerWidget } from './widget'
+
+function ProductPage() {
+  const handleSizeRecommended = (size: string) => {
+    console.log('Recommended size:', size)
+    // Handle the size recommendation
+  }
+
+  return (
+    <FindYourSizerWidget 
+      onSizeRecommended={handleSizeRecommended}
+    />
+  )
+}
 ```
 
-### 2. Add Widget Container
-```html
-<div 
-    data-yoursizer
-    data-product-id="your-product-id"
-    data-brand-id="your-brand-id"
-    data-clothing-type="tshirt"
-    data-license-key="your-license-key"
-    data-button-text="Find My Perfect Size"
-    data-position="center"
-></div>
+### Custom Button Text and Styling
+```tsx
+<FindYourSizerWidget 
+  buttonText="Get My Perfect Size"
+  position="center"
+  className="w-full flex justify-center"
+  buttonBg="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+/>
 ```
 
-### 3. Optional: Manual Initialization
-```html
-<script>
-YourSizer.init({
-    merchantId: 'your-merchant-id',
-    onSizeRecommended: function(size) {
-        console.log('Recommended size:', size);
-        // Handle size recommendation
-    }
-});
-</script>
+### Product-Specific Configuration
+```tsx
+<FindYourSizerWidget 
+  buttonText="Find My Size"
+  productId="tshirt-classic-001"
+  brandId="demo-store"
+  clothingType="upperwear"
+  onSizeRecommended={(size) => setSelectedSize(size)}
+/>
 ```
 
-## 📋 Configuration Options
+### Complete E-commerce Integration
+```tsx
+import React, { useState } from 'react'
+import { FindYourSizerWidget } from './widget'
 
-| Attribute | Description | Default |
-|-----------|-------------|---------|
-| `data-product-id` | Unique product identifier | `demo-product` |
-| `data-brand-id` | Brand identifier | `demo-brand` |
-| `data-clothing-type` | Type of clothing | `tshirt` |
-| `data-license-key` | Your license key | `demo-license-key` |
-| `data-button-text` | Button text | `Find Your Size` |
-| `data-position` | Button position | `center` |
-| `data-class-name` | CSS classes | `''` |
-| `data-button-bg` | Button background | `undefined` |
+export function ProductPage() {
+  const [selectedSize, setSelectedSize] = useState<string | null>(null)
 
-## 🧪 Testing
+  const handleSizeRecommended = (size: string) => {
+    console.log('📦 Size recommended:', size)
+    setSelectedSize(size)
+  }
 
-Visit the [test page](https://shashank1623.github.io/yoursizer-widget-test/test-embed.html) to see the widget in action.
+  return (
+    <div className="product-page">
+      <div className="product-info">
+        <h1>Classic T-Shirt</h1>
+        <p>$29.99</p>
+        
+        {/* Size Selection */}
+        <div className="size-buttons">
+          {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
+            <button
+              key={size}
+              className={`size-button ${selectedSize === size ? 'selected' : ''}`}
+              onClick={() => setSelectedSize(size)}
+            >
+              {size}
+            </button>
+          ))}
+        </div>
+        
+        {/* YourSizer Widget */}
+        <FindYourSizerWidget 
+          buttonText="Find My Perfect Size"
+          position="center"
+          className="w-full flex"
+          buttonBg="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+          licenseKey="your-license-key"
+          productId="tshirt-classic-001"
+          brandId="demo-store"
+          clothingType="upperwear"
+          onSizeRecommended={handleSizeRecommended}
+        />
+        
+        {/* Add to Cart Button */}
+        <button 
+          className="add-to-cart"
+          disabled={!selectedSize}
+        >
+          {selectedSize ? `Add to Cart - Size ${selectedSize}` : 'Select Size First'}
+        </button>
+      </div>
+    </div>
+  )
+}
+```
 
-## 🛠️ Development
+## License Verification
+
+The widget includes built-in license verification. When an invalid license is detected, a user-friendly overlay appears with:
+
+- Clear error messages
+- Retry functionality
+- Support contact information
+- Common troubleshooting tips
+
+### License States
+
+1. **Valid License**: Widget opens normally, shows sizing assistant
+2. **Invalid License**: Shows license overlay with error message
+3. **Network Error**: Shows license overlay with retry option
+4. **Checking**: Shows loading state during verification
+
+## API Integration
+
+The widget dynamically sends the following data to the size recommendation API:
+
+```typescript
+{
+  gender: "male" | "female",
+  measurements: {
+    chest: number,
+    waist: number,
+    hip: number,
+    height: number,
+    weight: number
+  },
+  clothing_type: string,    // From clothingType prop
+  brand_id: string,         // From brandId prop
+  product_id: string        // From productId prop
+}
+```
+
+## Profile Integration
+
+The widget automatically:
+
+- Loads existing user profiles
+- Handles profile creation and updates
+- Provides fast-track mode for returning users
+- Syncs measurements across sessions
+- Maintains user preferences and settings
+
+## Styling and Customization
+
+### Button Positioning
+
+```tsx
+// Center (default)
+<FindYourSizerWidget position="center" />
+
+// Top
+<FindYourSizerWidget position="top" />
+
+// Bottom
+<FindYourSizerWidget position="bottom" />
+
+// Left
+<FindYourSizerWidget position="left" />
+
+// Right
+<FindYourSizerWidget position="right" />
+```
+
+### Custom Backgrounds
+
+```tsx
+// Solid color
+<FindYourSizerWidget buttonBg="#3B82F6" />
+
+// Linear gradient
+<FindYourSizerWidget 
+  buttonBg="linear-gradient(135deg, #667eea 0%, #764ba2 100%)" 
+/>
+
+// Radial gradient
+<FindYourSizerWidget 
+  buttonBg="radial-gradient(circle, #667eea 0%, #764ba2 100%)" 
+/>
+
+// Default animated gradient (no buttonBg prop)
+<FindYourSizerWidget />
+```
+
+### CSS Classes
+
+```tsx
+// Full width with custom spacing
+<FindYourSizerWidget 
+  className="w-full flex justify-center mb-4" 
+/>
+
+// Custom container styling
+<FindYourSizerWidget 
+  className="my-custom-class" 
+/>
+```
+
+## Dependencies
+
+- React 18+
+- Framer Motion (for animations)
+- Profile Service (for user management)
+- Sizing Assistant (for AI recommendations)
+- License verification system
+- Three.js (for 3D model rendering)
+
+## Browser Support
+
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+
+## Installation
 
 ```bash
-# Install dependencies
-npm install
+npm install yoursizer-widget
+# or
+yarn add yoursizer-widget
+```
 
-# Build widget
-npm run build:widget
+## Development
 
-# Start development server
+```bash
 npm run dev
+npm run build
+npm run test
 ```
 
-## 📦 Build Output
+## Support
 
-- `dist/yoursizer-widget.umd.js` - UMD bundle for script tag usage
-- `dist/yoursizer-widget.es.js` - ES module for modern bundlers
+For support, contact:
+- Email: support@yoursizer.com
+- Documentation: [docs.yoursizer.com](https://docs.yoursizer.com)
+- GitHub Issues: [github.com/yoursizer/widget](https://github.com/yoursizer/widget)
 
-## 🔗 Integration Examples
-
-### E-commerce Product Page
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Product Page</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://shashank1623.github.io/yoursizer-widget-test/yoursizer-widget.umd.js"></script>
-</head>
-<body>
-    <div class="product-page">
-        <h1>Premium T-Shirt</h1>
-        <div 
-            data-yoursizer
-            data-product-id="premium-tshirt-001"
-            data-brand-id="your-brand"
-            data-clothing-type="tshirt"
-            data-license-key="your-license-key"
-        ></div>
-    </div>
-</body>
-</html>
-```
-
-## 🎯 Features
-
-- ✅ **3D Body Visualization** - Interactive 3D model with real-time morphing
-- ✅ **AI Size Recommendation** - Advanced algorithms for accurate sizing
-- ✅ **Mobile Responsive** - Works perfectly on all devices
-- ✅ **Easy Integration** - Just include a script tag
-- ✅ **Customizable UI** - Flexible styling and positioning options
-- ✅ **Profile Management** - Save and reuse user measurements
-- ✅ **Analytics Ready** - Built-in tracking and analytics
-
-## 📄 License
-
-MIT License - see LICENSE file for details.
-
-## 🤝 Support
-
-For support and questions, please contact [support@yoursizer.com](mailto:support@yoursizer.com)
+# YourSizer Widget - Script Tag Integration

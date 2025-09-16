@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { analytics } from '../action/analytics';
 
 interface SizeRecommendationRequest {
   gender: "male" | "female";
@@ -9,34 +10,54 @@ interface SizeRecommendationRequest {
     height: number;
     weight: number;
   };
+  fit_preference: "slim" | "regular" | "relaxed";
   clothing_type: string;
+  use_ai: boolean;
   brand_id: string;  // Changed from 'brand' to 'brand_id'
   product_id: string;  // Added product_id field
+  license_key?: string; // Added license_key for analytics tracking
 }
 
-// API Response Type - Only New Format
-interface SizeRecommendationResponse {
-  recommended_size: string;
-  smaller_size: string | null;
-  larger_size: string | null;
-  user_score: number;
-  range_type: "ideal" | "upper_range" | "lower_range";
-  comments: {
-    main: string;
-    smaller: string | null;
-    larger: string | null;
+// AI Response Type
+interface AIRecommendationResponse {
+  method: "ai";
+  source: string;
+  recommendation: {
+    recommended_size: string;
+    confidence_score: number;
+    explanation: string;
+    alternative_sizes: Array<{
+      size: string;
+      confidence: number;
+      reason: string;
+    }>;
+    fit_notes: string;
   };
 }
+
+// Algorithm Response Type (keeping for backward compatibility)
+interface AlgorithmRecommendationResponse {
+  method: "algorithm";
+  recommended_size: string;
+  match_percentage: number;
+  all_sizes: {
+    [key: string]: number;
+  };
+}
+
+type SizeRecommendationResponse = AIRecommendationResponse | AlgorithmRecommendationResponse;
 
 interface ProcessedSizeRecommendation {
   size: string;
   confidence: number;
+  method: string;
   explanation?: string;
-  smaller_size?: string | null;
-  larger_size?: string | null;
-  smaller_reason?: string | null;
-  larger_reason?: string | null;
-  range_type?: string;
+  fit_notes?: string;
+  alternative_sizes?: Array<{
+    size: string;
+    confidence: number;
+    reason?: string;
+  }>;
 }
 
 export const useSizeRecommendation = () => {
@@ -48,37 +69,26 @@ export const useSizeRecommendation = () => {
     setError(null);
 
     try {
-      // Direct call to production API instead of local route
-      const apiUrl = 'https://algo2.yoursizer.com/getrecommendation';
-      
-      // Log the request data and stack trace
+      // Log the request data
       console.log('🚀 Size Recommendation API Request:', {
-        url: apiUrl,
+        url: 'https://algo2.yoursizer.com/calculate-size',
         data: requestData
       });
-      console.trace('🔍 API Call Stack Trace:');
 
-      const response = await fetch(apiUrl, {
+      const response = await fetch('https://algo2.yoursizer.com/calculate-size', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          gender: requestData.gender,
-          measurements: {
-            height: requestData.measurements.height,
-            weight: requestData.measurements.weight,
-            chest: requestData.measurements.chest,
-            waist: requestData.measurements.waist,
-            hip: requestData.measurements.hip
-          },
-          clothing_type: requestData.clothing_type,
-          brand_id: requestData.brand_id,
-          product_id: requestData.product_id
-        }),
+        body: JSON.stringify(requestData),
       });
 
+      // Log the response status
+      console.log('📡 API Response Status:', response.status, response.statusText);
+
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error('❌ API Error Response:', errorText);
         throw new Error(`API request failed: ${response.status} ${response.statusText}`);
       }
 
@@ -87,19 +97,84 @@ export const useSizeRecommendation = () => {
       // Log the successful response
       console.log('✅ Size Recommendation API Response:', data);
 
-      return {
-        size: data.recommended_size,
-        confidence: data.user_score,
-        explanation: data.comments.main,
-        smaller_size: data.smaller_size,
-        larger_size: data.larger_size,
-        smaller_reason: data.comments.smaller,
-        larger_reason: data.comments.larger,
-        range_type: data.range_type
-      };
+      // Process the response based on method type
+      if (data.method === "ai") {
+        const aiData = data as AIRecommendationResponse;
+        const result = {
+          size: aiData.recommendation.recommended_size,
+          confidence: aiData.recommendation.confidence_score,
+          method: "ai",
+          explanation: aiData.recommendation.explanation,
+          fit_notes: aiData.recommendation.fit_notes,
+          alternative_sizes: aiData.recommendation.alternative_sizes.map(alt => ({
+            size: alt.size,
+            confidence: alt.confidence,
+            reason: alt.reason
+          }))
+        };
+
+        // Track the recommended size result to analytics
+        if (requestData.license_key) {
+          try {
+            await analytics.trackRecommendedSizeResult(
+              requestData.license_key,
+              requestData.product_id,
+              requestData.brand_id,
+              requestData.clothing_type,
+              requestData.gender,
+              requestData.measurements,
+              requestData.fit_preference,
+              result.size,
+              result.confidence,
+              result.method,
+              result.explanation,
+              result.fit_notes,
+              result.alternative_sizes
+            );
+          } catch (analyticsError) {
+            console.error('Failed to track recommended size result:', analyticsError);
+            // Don't fail the main request if analytics tracking fails
+          }
+        }
+
+        return result;
+      } else if (data.method === "algorithm") {
+        const algoData = data as AlgorithmRecommendationResponse;
+        const result = {
+          size: algoData.recommended_size,
+          confidence: algoData.match_percentage,
+          method: "algorithm"
+        };
+
+        // Track the recommended size result to analytics
+        if (requestData.license_key) {
+          try {
+            await analytics.trackRecommendedSizeResult(
+              requestData.license_key,
+              requestData.product_id,
+              requestData.brand_id,
+              requestData.clothing_type,
+              requestData.gender,
+              requestData.measurements,
+              requestData.fit_preference,
+              result.size,
+              result.confidence,
+              result.method
+            );
+          } catch (analyticsError) {
+            console.error('Failed to track recommended size result:', analyticsError);
+            // Don't fail the main request if analytics tracking fails
+          }
+        }
+
+        return result;
+      } else {
+        throw new Error('Unknown response method type');
+      }
     } catch (err) {
-      console.error('❌ Size Recommendation API Error:', err);
-      setError(err instanceof Error ? err.message : 'Unknown error occurred');
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+      console.error('❌ Size Recommendation API Error:', errorMessage);
+      setError(errorMessage);
       return null;
     } finally {
       setIsLoading(false);

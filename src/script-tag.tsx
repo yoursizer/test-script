@@ -1,153 +1,187 @@
-import React from 'react'
-import { createRoot } from 'react-dom/client'
-import { FindYourSizerWidget } from './widget'
+import { SimpleYourSizerWidget } from './simple-widget'
+import './index.css'
 
-// Global YourSizer interface
-interface YourSizerConfig {
-  merchantId?: string
-  productId?: string
-  brandId?: string
-  clothingType?: string
-  licenseKey?: string
+// Get React and ReactDOM from global scope for UMD builds
+// This ensures we use the globally loaded React/ReactDOM instead of bundled versions
+const GlobalReact = (window as any).React
+const GlobalReactDOM = (window as any).ReactDOM
+
+// Ensure React and ReactDOM are available
+if (!GlobalReact) {
+  throw new Error('React must be loaded globally before this script. Please include React 18 via script tag.')
+}
+if (!GlobalReactDOM) {
+  throw new Error('ReactDOM must be loaded globally before this script. Please include ReactDOM 18 via script tag.')
+}
+
+// Global interface for the widget API
+interface WidgetOptions {
+  container: HTMLElement
   buttonText?: string
   position?: 'top' | 'bottom' | 'left' | 'right' | 'center'
   className?: string
   buttonBg?: string
+  licenseKey?: string
   onSizeRecommended?: (size: string) => void
-  rootSelector?: string
+  productId?: string
+  brandId?: string
+  clothingType?: string
 }
 
-// Global YourSizer object
-declare global {
-  interface Window {
-    YourSizer: {
-      init: (config: YourSizerConfig) => void
-      mount: (selector: string, config: YourSizerConfig) => void
-      version: string
-    }
-  }
+interface WidgetInstance {
+  destroy: () => void
+  update: (options: Partial<WidgetOptions>) => void
 }
 
-class YourSizerManager {
-  private instances: Map<string, any> = new Map()
-  private version = '1.0.0'
+// Global widget class
+class YoursizerWidget {
+  private root: any = null
+  private container: HTMLElement | null = null
+  private options: WidgetOptions
 
-  init(config: YourSizerConfig) {
-    console.log('🚀 YourSizer: Initializing with config:', config)
-    
-    // Default configuration
-    const defaultConfig: YourSizerConfig = {
-      merchantId: 'demo-merchant',
-      productId: 'demo-product',
-      brandId: 'demo-brand',
-      clothingType: 'tshirt',
-      licenseKey: 'demo-license-key',
-      buttonText: 'Find Your Size',
-      position: 'center',
-      className: '',
-      rootSelector: '[data-yoursizer]'
-    }
-
-    const finalConfig = { ...defaultConfig, ...config }
-    
-    // Auto-mount if rootSelector is provided
-    if (finalConfig.rootSelector) {
-      this.mount(finalConfig.rootSelector, finalConfig)
-    }
+  constructor() {
+    this.options = {} as WidgetOptions
   }
 
-  mount(selector: string, config: YourSizerConfig) {
-    console.log('🎯 YourSizer: Mounting to selector:', selector)
+  create(options: WidgetOptions): WidgetInstance {
+    this.container = options.container
+    this.options = options
     
-    const elements = document.querySelectorAll(selector)
+    // Clear the container
+    this.container.innerHTML = ''
     
-    if (elements.length === 0) {
-      console.warn('⚠️ YourSizer: No elements found with selector:', selector)
-      return
+    // Double-check React and ReactDOM are available
+    if (!GlobalReact || !GlobalReactDOM) {
+      throw new Error('React and ReactDOM must be loaded before initializing the widget. Please ensure React 18 is loaded via script tags.')
     }
-
-    elements.forEach((element, index) => {
-      const instanceId = `${selector}-${index}`
-      
-      // Check if already mounted
-      if (this.instances.has(instanceId)) {
-        console.log('🔄 YourSizer: Already mounted, skipping:', instanceId)
-        return
+    
+    console.log('GlobalReact:', GlobalReact);
+    console.log('GlobalReactDOM:', GlobalReactDOM);
+    console.log('GlobalReactDOM.createRoot:', GlobalReactDOM.createRoot);
+    
+    try {
+      // Create React root and render using global React/ReactDOM
+      if (GlobalReactDOM.createRoot) {
+        // React 18+ with createRoot
+        console.log('Using React 18 createRoot');
+        this.root = GlobalReactDOM.createRoot(this.container)
+        this.root.render(
+          GlobalReact.createElement(SimpleYourSizerWidget, {
+            buttonText: options.buttonText,
+            position: options.position,
+            className: options.className,
+            buttonBg: options.buttonBg,
+            licenseKey: options.licenseKey,
+            onSizeRecommended: options.onSizeRecommended,
+            productId: options.productId,
+            brandId: options.brandId,
+            clothingType: options.clothingType
+          })
+        )
+      } else {
+        // Fallback for older React versions
+        console.log('Using React legacy render');
+        GlobalReactDOM.render(
+          GlobalReact.createElement(SimpleYourSizerWidget, {
+            buttonText: options.buttonText,
+            position: options.position,
+            className: options.className,
+            buttonBg: options.buttonBg,
+            licenseKey: options.licenseKey,
+            onSizeRecommended: options.onSizeRecommended,
+            productId: options.productId,
+            brandId: options.brandId,
+            clothingType: options.clothingType
+          }),
+          this.container
+        )
       }
+    } catch (error) {
+      console.error('Error creating React root:', error);
+      throw error;
+    }
 
-      // Create React root and mount widget
-      const root = createRoot(element as HTMLElement)
+    return {
+      destroy: () => this.destroy(),
+      update: (newOptions) => this.update(newOptions)
+    }
+  }
+
+  private destroy() {
+    if (this.root) {
+      if (this.root.unmount) {
+        // React 18+ with createRoot
+        this.root.unmount()
+      } else {
+        // Fallback for older React versions
+        GlobalReactDOM.unmountComponentAtNode(this.container!)
+      }
+      this.root = null
+    }
+    if (this.container) {
+      this.container.innerHTML = ''
+      this.container = null
+    }
+  }
+
+  private update(newOptions: Partial<WidgetOptions>) {
+    if (this.container) {
+      const updatedOptions = { ...this.options, ...newOptions }
+      this.options = updatedOptions
       
-      // Extract data attributes from element
-      const dataConfig = this.extractDataAttributes(element as HTMLElement)
-      const finalConfig = { ...config, ...dataConfig }
-
-      root.render(
-        React.createElement(FindYourSizerWidget, {
-          buttonText: finalConfig.buttonText,
-          position: finalConfig.position,
-          className: finalConfig.className,
-          buttonBg: finalConfig.buttonBg,
-          licenseKey: finalConfig.licenseKey,
-          onSizeRecommended: finalConfig.onSizeRecommended,
-          productId: finalConfig.productId,
-          brandId: finalConfig.brandId,
-          clothingType: finalConfig.clothingType
-        })
-      )
-
-      this.instances.set(instanceId, root)
-      console.log('✅ YourSizer: Successfully mounted to:', instanceId)
-    })
-  }
-
-  private extractDataAttributes(element: HTMLElement): Partial<YourSizerConfig> {
-    const config: Partial<YourSizerConfig> = {}
-    
-    // Extract data attributes
-    if (element.dataset.productId) config.productId = element.dataset.productId
-    if (element.dataset.brandId) config.brandId = element.dataset.brandId
-    if (element.dataset.clothingType) config.clothingType = element.dataset.clothingType
-    if (element.dataset.licenseKey) config.licenseKey = element.dataset.licenseKey
-    if (element.dataset.buttonText) config.buttonText = element.dataset.buttonText
-    if (element.dataset.position) config.position = element.dataset.position as any
-    if (element.dataset.className) config.className = element.dataset.className
-    if (element.dataset.buttonBg) config.buttonBg = element.dataset.buttonBg
-
-    return config
-  }
-
-  getVersion() {
-    return this.version
+      if (this.root && this.root.render) {
+        // React 18+ with createRoot
+        this.root.render(
+          GlobalReact.createElement(SimpleYourSizerWidget, {
+            buttonText: updatedOptions.buttonText,
+            position: updatedOptions.position,
+            className: updatedOptions.className,
+            buttonBg: updatedOptions.buttonBg,
+            licenseKey: updatedOptions.licenseKey,
+            onSizeRecommended: updatedOptions.onSizeRecommended,
+            productId: updatedOptions.productId,
+            brandId: updatedOptions.brandId,
+            clothingType: updatedOptions.clothingType
+          })
+        )
+      } else {
+        // Fallback for older React versions
+        GlobalReactDOM.render(
+          GlobalReact.createElement(SimpleYourSizerWidget, {
+            buttonText: updatedOptions.buttonText,
+            position: updatedOptions.position,
+            className: updatedOptions.className,
+            buttonBg: updatedOptions.buttonBg,
+            licenseKey: updatedOptions.licenseKey,
+            onSizeRecommended: updatedOptions.onSizeRecommended,
+            productId: updatedOptions.productId,
+            brandId: updatedOptions.brandId,
+            clothingType: updatedOptions.clothingType
+          }),
+          this.container
+        )
+      }
+    }
   }
 }
 
 // Create global instance
-const yourSizerManager = new YourSizerManager()
+const widgetInstance = new YoursizerWidget()
 
-// Expose to global scope
-window.YourSizer = {
-  init: (config: YourSizerConfig) => yourSizerManager.init(config),
-  mount: (selector: string, config: YourSizerConfig) => yourSizerManager.mount(selector, config),
-  version: yourSizerManager.getVersion()
-}
-
-// Auto-initialize if DOM is ready
-function autoInitialize() {
-  console.log('📄 YourSizer: Auto-initializing...')
-  // Auto-mount elements with data-yoursizer attribute
-  const autoElements = document.querySelectorAll('[data-yoursizer]')
-  if (autoElements.length > 0) {
-    yourSizerManager.init({})
+// Expose global API
+declare global {
+  interface Window {
+    SimpleYourSizerWidget: {
+      create: (options: WidgetOptions) => WidgetInstance
+    }
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', autoInitialize)
-} else {
-  // DOM already ready, but wait a bit for other scripts to load
-  setTimeout(autoInitialize, 100)
+// Set global API
+window.SimpleYourSizerWidget = {
+  create: (options: WidgetOptions) => widgetInstance.create(options)
 }
 
 // Export for module systems
-export default window.YourSizer
+export { YoursizerWidget }
+export default window.SimpleYourSizerWidget

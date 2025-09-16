@@ -42,13 +42,14 @@
   },
   "private": false,
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.888.0",
     "@types/node": "^24.1.0",
     "@types/three": "^0.158.3",
     "@types/uuid": "^10.0.0",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.292.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
     "three": "^0.158.0",
     "uuid": "^11.1.0"
   },
@@ -65,14 +66,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:widget": "vite build --mode widget",
-    "build:demo": "vite build --mode demo",
     "preview": "vite preview",
-    "preview:widget": "vite preview --mode widget",
     "type-check": "tsc --noEmit",
     "lint": "eslint src --ext .ts,.tsx",
-    "test": "jest",
-    "serve:test": "python3 -m http.server 8080 --directory ."
+    "test": "jest"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
