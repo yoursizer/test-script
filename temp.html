@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- YourSizer Widget Integration -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="https://yoursizer-script-tag.s3.eu-north-1.amazonaws.com/dist/style.css">
+
+<div id="yoursizer-widget-container"></div>
+
+<script src="https://yoursizer-script-tag.s3.eu-north-1.amazonaws.com/dist/yoursizer-widget.umd.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('yoursizer-widget-container');
+        
+        function waitForDependencies() {
+            if (typeof window.React !== 'undefined' && 
+                typeof window.ReactDOM !== 'undefined' && 
+                typeof window.FindYourSizerWidget !== 'undefined') {
+                initializeWidget();
+            } else {
+                setTimeout(waitForDependencies, 100);
+            }
+        }
+
+        function initializeWidget() {
+            try {
+                window.FindYourSizerWidget.create({
+                    container: container,
+                    buttonText: "Find Your Perfect Size",
+                    position: "center",
+                    className: "w-full",
+                    buttonBg: "#4F46E5",
+                    licenseKey: "7b2e2a34-07f7-4798-8a6f-f9b6ed0365c5",
+                    onSizeRecommended: function(size) {
+                        console.log('Recommended size:', size);
+                        // You can add analytics or send to Ticimax here
+                    },
+                    productId: "yoursizer_upperwear_001",
+                    brandId: "yoursizer",
+                    clothingType: "Shirts"
+                });
+            } catch (error) {
+                console.error('Error initializing YourSizer widget:', error);
+            }
+        }
+
+        waitForDependencies();
+    });
+</script>
+</body>
+</html>
