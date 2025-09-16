@@ -1,0 +1,38 @@
+<!-- 1. Load React dependencies first -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+<!-- 2. Load Tailwind CSS (REQUIRED for the widget to work) -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- 3. Load widget CSS -->
+<link rel="stylesheet" href="https://yoursizer-script-tag.s3.eu-north-1.amazonaws.com/dist/style.css">
+
+<!-- 4. Create container for widget -->
+<div id="yoursizer-widget-container"></div>
+
+<!-- 5. Load widget script -->
+<script src="https://yoursizer-script-tag.s3.eu-north-1.amazonaws.com/dist/yoursizer-widget.umd.js"></script>
+
+<!-- 6. Initialize widget -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('yoursizer-widget-container');
+        
+        window.FindYourSizerWidget.create({
+            container: container,
+            buttonText: "Find Your Perfect Size", // Customize button text
+            position: "center",                   // Options: "center", "left", "right"
+            className: "w-full",                 // Additional CSS classes
+            buttonBg: "#4F46E5",                // Button background color or gradient
+            licenseKey: "7b2e2a34-07f7-4798-8a6f-f9b6ed0365c5",      // Replace with your license key
+            onSizeRecommended: function(size) {
+                console.log('Recommended size:', size);
+                // Handle the recommended size here
+            },
+            productId: {URUN_ID},        // Replace with your product ID
+            brandId: "YOUR_BRAND_ID",            // Replace with your brand ID
+            clothingType: "YOUR_CLOTHING_TYPE"   // e.g., "Shirts", "Pants", etc.
+        });
+    });
+</script>
